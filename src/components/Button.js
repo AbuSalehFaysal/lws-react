@@ -11,12 +11,17 @@ export default class Button extends Component {
     }
 
     render() {
-        console.log('button componenet rendered');
-        const { change, locale } = this.props;
+        const { change, locale, show, enable } = this.props;
+        if (!enable) return null;
         return (
-            <button type="button" onClick={() => change(locale)}>
-                Click here
-            </button>
+            <div>
+                <button type="button" onClick={() => change(locale)}>
+                    {locale === 'bn-BD'
+                        ? 'Change the Clock to Bangla'
+                        : 'Change the clock to English'}
+                </button>
+                {show && <p>Hello</p>}
+            </div>
         );
     }
 }
