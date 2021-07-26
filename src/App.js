@@ -6,11 +6,24 @@ import ThemeContext from './contexts/themeContext';
 
 export default class App extends React.Component {
     state = {
+        // eslint-disable-next-line react/no-unused-state
         theme: 'dark',
+        // eslint-disable-next-line react/no-unused-state
+        switchTheme: () => {
+            this.setState(({ theme }) => {
+                if (theme === 'dark') {
+                    return {
+                        theme: 'light',
+                    };
+                }
+                return {
+                    theme: 'dark',
+                };
+            });
+        },
     };
 
     render() {
-        const { theme } = this.state;
         return (
             <div className="App">
                 <Counter>
@@ -18,7 +31,7 @@ export default class App extends React.Component {
                         <ClickCounter count={counter} incrementCount={incrementCount} />
                     )}
                 </Counter>
-                <ThemeContext.Provider value={{ theme }}>
+                <ThemeContext.Provider value={this.state}>
                     <Section />
                 </ThemeContext.Provider>
             </div>
